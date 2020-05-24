@@ -82,7 +82,7 @@ export class ScrollView extends ViewBase<RX.Types.ScrollViewProps, RX.Types.Stat
         // Set final styles upon initialization of the first ScrollView. This was previously done in the head
         // of this file, but it broke the pattern of not doing external work (such as accessing the document
         // object) on Types initialization.
-        if (!_initializedCustomStyles) {
+        if (!_initializedCustomStyles && ScrollViewConfig.useCustomScrollbars()) {
             _initializedCustomStyles = true;
 
             const nativeScrollbarWidth = CustomScrollbar.getNativeScrollbarWidth();
@@ -113,7 +113,7 @@ export class ScrollView extends ViewBase<RX.Types.ScrollViewProps, RX.Types.Stat
 
     private _mounted = false;
     private _customScrollbar: CustomScrollbar | undefined;
-    private _customScrollbarEnabled = true;
+    private _customScrollbarEnabled = false;
     private _dragging = false;
 
     componentDidUpdate() {
